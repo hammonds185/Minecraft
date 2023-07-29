@@ -74,13 +74,12 @@ def tex_coords(top, bottom, side):
     return result
 
 
-TEXTURE_PATH = 'texturenew.PNG'
+TEXTURE_PATH = 'texture.png'
 
 GRASS = tex_coords((1, 0), (0, 1), (0, 0))
 SAND = tex_coords((1, 1), (1, 1), (1, 1))
 BRICK = tex_coords((2, 0), (2, 0), (2, 0))
 STONE = tex_coords((2, 1), (2, 1), (2, 1))
-COAL = tex_coords((3, 0), (3, 0), (3, 0))
 
 FACES = [
     ( 0, 1, 0),
@@ -167,14 +166,7 @@ class Model(object):
             for z in xrange(-n, n + 1, s):
                 # create a layer stone an grass everywhere.
                 self.add_block((x, y - 2, z), GRASS, immediate=False)
-                self.add_block((x, y - 3, z), GRASS, immediate=False)
-
-                # Create a 10-layer down layer of dirt
-                for dy in range(1, 11):
-                    self.add_block((x, y - 3 - dy, z), GRASS, immediate=False)
-                # add bottom layer of stone
-                self.add_block((x, y - 2, z), GRASS, immediate=False)
-
+                self.add_block((x, y - 3, z), STONE, immediate=False)
                 if x in (-n, n) or z in (-n, n):
                     # create outer walls.
                     for dy in xrange(-2, 3):
@@ -189,7 +181,7 @@ class Model(object):
             h = random.randint(1, 6)  # height of the hill
             s = random.randint(4, 8)  # 2 * s is the side length of the hill
             d = 1  # how quickly to taper off the hills
-            t = random.choice([GRASS, SAND, BRICK, COAL])
+            t = random.choice([GRASS, SAND, BRICK])
             for y in xrange(c, c + h):
                 for x in xrange(a - s, a + s + 1):
                     for z in xrange(b - s, b + s + 1):
