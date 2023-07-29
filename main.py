@@ -76,6 +76,7 @@ def tex_coords(top, bottom, side):
 
 TEXTURE_PATH = 'texturenew.PNG'
 
+DIRT = tex_coords((0, 1), (0, 1), (0, 1))
 GRASS = tex_coords((1, 0), (0, 1), (0, 0))
 SAND = tex_coords((1, 1), (1, 1), (1, 1))
 BRICK = tex_coords((2, 0), (2, 0), (2, 0))
@@ -167,13 +168,13 @@ class Model(object):
             for z in xrange(-n, n + 1, s):
                 # create a layer stone an grass everywhere.
                 self.add_block((x, y - 2, z), GRASS, immediate=False)
-                self.add_block((x, y - 3, z), GRASS, immediate=False)
+                #self.add_block((x, y - 3, z), DIRT, immediate=False)
 
-                # Create a 10-layer down layer of dirt
-                for dy in range(1, 11):
-                    self.add_block((x, y - 3 - dy, z), GRASS, immediate=False)
+                # Create a 7-layer down layer of dirt
+                for dy in range(1, 8):
+                    self.add_block((x, y - 2 - dy, z), DIRT, immediate=False)
                 # add bottom layer of stone
-                self.add_block((x, y - 2, z), GRASS, immediate=False)
+                self.add_block((x, y - 10, z), STONE, immediate=False)
 
                 if x in (-n, n) or z in (-n, n):
                     # create outer walls.
